@@ -524,6 +524,62 @@ public class GramaticaLatinoParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class CondicionalesContext extends ParserRuleContext {
+		public CondicionalesContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_condicionales; }
+	 
+		public CondicionalesContext() { }
+		public void copyFrom(CondicionalesContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class MientrasContext extends CondicionalesContext {
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public List<StatementContext> statement() {
+			return getRuleContexts(StatementContext.class);
+		}
+		public StatementContext statement(int i) {
+			return getRuleContext(StatementContext.class,i);
+		}
+		public MientrasContext(CondicionalesContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterMientras(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitMientras(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ParaContext extends CondicionalesContext {
+		public TerminalNode ID() { return getToken(GramaticaLatinoParser.ID, 0); }
+		public TerminalNode VALOR_REAL() { return getToken(GramaticaLatinoParser.VALOR_REAL, 0); }
+		public DosparaContext dospara() {
+			return getRuleContext(DosparaContext.class,0);
+		}
+		public List<StatementContext> statement() {
+			return getRuleContexts(StatementContext.class);
+		}
+		public StatementContext statement(int i) {
+			return getRuleContext(StatementContext.class,i);
+		}
+		public ParaContext(CondicionalesContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterPara(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitPara(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class SiContext extends CondicionalesContext {
 		public ExpContext exp() {
 			return getRuleContext(ExpContext.class,0);
 		}
@@ -542,28 +598,78 @@ public class GramaticaLatinoParser extends Parser {
 		public SinoContext sino() {
 			return getRuleContext(SinoContext.class,0);
 		}
+		public SiContext(CondicionalesContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterSi(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitSi(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class RepetirContext extends CondicionalesContext {
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public List<StatementContext> statement() {
+			return getRuleContexts(StatementContext.class);
+		}
+		public StatementContext statement(int i) {
+			return getRuleContext(StatementContext.class,i);
+		}
+		public RepetirContext(CondicionalesContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterRepetir(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitRepetir(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ElegirContext extends CondicionalesContext {
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
 		public ContelegirContext contelegir() {
 			return getRuleContext(ContelegirContext.class,0);
 		}
+		public ElegirContext(CondicionalesContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterElegir(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitElegir(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class DesdeContext extends CondicionalesContext {
 		public TerminalNode ID() { return getToken(GramaticaLatinoParser.ID, 0); }
 		public AsigContext asig() {
 			return getRuleContext(AsigContext.class,0);
 		}
-		public TerminalNode VALOR_REAL() { return getToken(GramaticaLatinoParser.VALOR_REAL, 0); }
-		public DosparaContext dospara() {
-			return getRuleContext(DosparaContext.class,0);
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
 		}
-		public CondicionalesContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
+		public List<StatementContext> statement() {
+			return getRuleContexts(StatementContext.class);
 		}
-		@Override public int getRuleIndex() { return RULE_condicionales; }
+		public StatementContext statement(int i) {
+			return getRuleContext(StatementContext.class,i);
+		}
+		public DesdeContext(CondicionalesContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterCondicionales(this);
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterDesde(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitCondicionales(this);
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitDesde(this);
 		}
 	}
 
@@ -576,6 +682,7 @@ public class GramaticaLatinoParser extends Parser {
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case T__10:
+				_localctx = new SiContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(120);
@@ -625,6 +732,7 @@ public class GramaticaLatinoParser extends Parser {
 				}
 				break;
 			case T__12:
+				_localctx = new ElegirContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(138);
@@ -638,6 +746,7 @@ public class GramaticaLatinoParser extends Parser {
 				}
 				break;
 			case T__13:
+				_localctx = new DesdeContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(143);
@@ -677,6 +786,7 @@ public class GramaticaLatinoParser extends Parser {
 				}
 				break;
 			case T__15:
+				_localctx = new MientrasContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(159);
@@ -702,6 +812,7 @@ public class GramaticaLatinoParser extends Parser {
 				}
 				break;
 			case T__16:
+				_localctx = new ParaContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(168);
@@ -747,6 +858,7 @@ public class GramaticaLatinoParser extends Parser {
 				}
 				break;
 			case T__19:
+				_localctx = new RepetirContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(185);

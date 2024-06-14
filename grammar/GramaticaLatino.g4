@@ -31,12 +31,12 @@ auxcontimprimirf
     ;
 
 condicionales
-    :'si' exp statement+ osi* sino? 'fin'
-    |'elegir' exp contelegir 'fin'
-    |'desde' '(' ID asig ';' exp ';' statement ')' statement+ 'fin'
-    |'mientras' exp statement+ 'fin'
-    |'para' ID 'en' 'rango' '(' VALOR_REAL dospara? ')' statement+ 'fin'
-    |'repetir' statement+ 'hasta' exp
+    :'si' exp statement+ osi* sino? 'fin' #Si
+    |'elegir' exp contelegir 'fin'  #Elegir
+    |'desde' '(' ID asig ';' exp ';' statement ')' statement+ 'fin' #Desde
+    |'mientras' exp statement+ 'fin' #Mientras
+    |'para' ID 'en' 'rango' '(' VALOR_REAL dospara? ')' statement+ 'fin' #Para
+    |'repetir' statement+ 'hasta' exp #Repetir
     ;
 
 osi

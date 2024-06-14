@@ -57,15 +57,77 @@ public interface GramaticaLatinoListener extends ParseTreeListener {
 	 */
 	void exitAuxcontimprimirf(GramaticaLatinoParser.AuxcontimprimirfContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GramaticaLatinoParser#condicionales}.
+	 * Enter a parse tree produced by the {@code Si}
+	 * labeled alternative in {@link GramaticaLatinoParser#condicionales}.
 	 * @param ctx the parse tree
 	 */
-	void enterCondicionales(GramaticaLatinoParser.CondicionalesContext ctx);
+	void enterSi(GramaticaLatinoParser.SiContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GramaticaLatinoParser#condicionales}.
+	 * Exit a parse tree produced by the {@code Si}
+	 * labeled alternative in {@link GramaticaLatinoParser#condicionales}.
 	 * @param ctx the parse tree
 	 */
-	void exitCondicionales(GramaticaLatinoParser.CondicionalesContext ctx);
+	void exitSi(GramaticaLatinoParser.SiContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Elegir}
+	 * labeled alternative in {@link GramaticaLatinoParser#condicionales}.
+	 * @param ctx the parse tree
+	 */
+	void enterElegir(GramaticaLatinoParser.ElegirContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Elegir}
+	 * labeled alternative in {@link GramaticaLatinoParser#condicionales}.
+	 * @param ctx the parse tree
+	 */
+	void exitElegir(GramaticaLatinoParser.ElegirContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Desde}
+	 * labeled alternative in {@link GramaticaLatinoParser#condicionales}.
+	 * @param ctx the parse tree
+	 */
+	void enterDesde(GramaticaLatinoParser.DesdeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Desde}
+	 * labeled alternative in {@link GramaticaLatinoParser#condicionales}.
+	 * @param ctx the parse tree
+	 */
+	void exitDesde(GramaticaLatinoParser.DesdeContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Mientras}
+	 * labeled alternative in {@link GramaticaLatinoParser#condicionales}.
+	 * @param ctx the parse tree
+	 */
+	void enterMientras(GramaticaLatinoParser.MientrasContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Mientras}
+	 * labeled alternative in {@link GramaticaLatinoParser#condicionales}.
+	 * @param ctx the parse tree
+	 */
+	void exitMientras(GramaticaLatinoParser.MientrasContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Para}
+	 * labeled alternative in {@link GramaticaLatinoParser#condicionales}.
+	 * @param ctx the parse tree
+	 */
+	void enterPara(GramaticaLatinoParser.ParaContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Para}
+	 * labeled alternative in {@link GramaticaLatinoParser#condicionales}.
+	 * @param ctx the parse tree
+	 */
+	void exitPara(GramaticaLatinoParser.ParaContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Repetir}
+	 * labeled alternative in {@link GramaticaLatinoParser#condicionales}.
+	 * @param ctx the parse tree
+	 */
+	void enterRepetir(GramaticaLatinoParser.RepetirContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Repetir}
+	 * labeled alternative in {@link GramaticaLatinoParser#condicionales}.
+	 * @param ctx the parse tree
+	 */
+	void exitRepetir(GramaticaLatinoParser.RepetirContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GramaticaLatinoParser#osi}.
 	 * @param ctx the parse tree
