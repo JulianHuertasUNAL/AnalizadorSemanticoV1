@@ -123,6 +123,7 @@ lista
 
 auxlista
     : ',' exp
+    | ','
     ;
 
 dic
@@ -141,22 +142,22 @@ exp
     ;
 
 e
-    :CADENA_DE_CARACTERES
-    |ID auxid*
-    |ID '(' contdeclfunciones ')'
-    |'fun' '(' contdeclfunciones ')' statement+ 'fin'
-    |VALOR_REAL
-    |'-' VALOR_REAL
-    |'+' VALOR_REAL
-    |'verdadero'
-    |'cierto'
-    |'falso'
-    |'nulo'
-    |lista
-    |dic
-    |builtinexp
-    |'!' e
-    | '(' exp ')'
+    :CADENA_DE_CARACTERES  #cadenaCaracteres
+    |ID auxid* #idAuxId
+    |ID '(' contdeclfunciones ')' #idContDeclFunciones
+    |'fun' '(' contdeclfunciones ')' statement+ 'fin' #funAnonima
+    |VALOR_REAL #valorReal
+    |'-' VALOR_REAL #minusValorReal
+    |'+' VALOR_REAL #plusValorReal
+    |'verdadero' #verdadero
+    |'cierto' #cierto
+    |'falso' #falso
+    |'nulo' #nulo
+    |lista #expLista
+    |dic #expDic
+    |builtinexp #expBuiltIn
+    |'!' e #notE
+    | '(' exp ')' #parIExpParD
     ;
 
 builtinexp
@@ -167,7 +168,7 @@ builtinexp
 
 auxid
     :'[' exp ']'
-    |'(' exp? ')'
+    //|'(' exp? ')'
     |'.' ID
     ;
 

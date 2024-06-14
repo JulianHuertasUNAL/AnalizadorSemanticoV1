@@ -1,7 +1,2 @@
-	entro a s
-a +=1+2+(((1+1)))
-		entro a s
-a ++
-	salgo de s
-salgo de s
+carro[3]=miCarro()
 

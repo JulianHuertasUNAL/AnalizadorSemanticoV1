@@ -359,15 +359,197 @@ public interface GramaticaLatinoListener extends ParseTreeListener {
 	 */
 	void exitExp(GramaticaLatinoParser.ExpContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GramaticaLatinoParser#e}.
+	 * Enter a parse tree produced by the {@code cadenaCaracteres}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
 	 * @param ctx the parse tree
 	 */
-	void enterE(GramaticaLatinoParser.EContext ctx);
+	void enterCadenaCaracteres(GramaticaLatinoParser.CadenaCaracteresContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GramaticaLatinoParser#e}.
+	 * Exit a parse tree produced by the {@code cadenaCaracteres}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
 	 * @param ctx the parse tree
 	 */
-	void exitE(GramaticaLatinoParser.EContext ctx);
+	void exitCadenaCaracteres(GramaticaLatinoParser.CadenaCaracteresContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code idAuxId}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdAuxId(GramaticaLatinoParser.IdAuxIdContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code idAuxId}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdAuxId(GramaticaLatinoParser.IdAuxIdContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code idContDeclFunciones}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdContDeclFunciones(GramaticaLatinoParser.IdContDeclFuncionesContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code idContDeclFunciones}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdContDeclFunciones(GramaticaLatinoParser.IdContDeclFuncionesContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code funAnonima}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunAnonima(GramaticaLatinoParser.FunAnonimaContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code funAnonima}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunAnonima(GramaticaLatinoParser.FunAnonimaContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code valorReal}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterValorReal(GramaticaLatinoParser.ValorRealContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code valorReal}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitValorReal(GramaticaLatinoParser.ValorRealContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code minusValorReal}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterMinusValorReal(GramaticaLatinoParser.MinusValorRealContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code minusValorReal}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitMinusValorReal(GramaticaLatinoParser.MinusValorRealContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code plusValorReal}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlusValorReal(GramaticaLatinoParser.PlusValorRealContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code plusValorReal}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlusValorReal(GramaticaLatinoParser.PlusValorRealContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code verdadero}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterVerdadero(GramaticaLatinoParser.VerdaderoContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code verdadero}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitVerdadero(GramaticaLatinoParser.VerdaderoContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code cierto}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterCierto(GramaticaLatinoParser.CiertoContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code cierto}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitCierto(GramaticaLatinoParser.CiertoContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code falso}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterFalso(GramaticaLatinoParser.FalsoContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code falso}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitFalso(GramaticaLatinoParser.FalsoContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code nulo}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterNulo(GramaticaLatinoParser.NuloContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code nulo}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitNulo(GramaticaLatinoParser.NuloContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code expLista}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpLista(GramaticaLatinoParser.ExpListaContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expLista}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpLista(GramaticaLatinoParser.ExpListaContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code expDic}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpDic(GramaticaLatinoParser.ExpDicContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expDic}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpDic(GramaticaLatinoParser.ExpDicContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code expBuiltIn}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpBuiltIn(GramaticaLatinoParser.ExpBuiltInContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expBuiltIn}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpBuiltIn(GramaticaLatinoParser.ExpBuiltInContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code notE}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterNotE(GramaticaLatinoParser.NotEContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code notE}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitNotE(GramaticaLatinoParser.NotEContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code parIExpParD}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterParIExpParD(GramaticaLatinoParser.ParIExpParDContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code parIExpParD}
+	 * labeled alternative in {@link GramaticaLatinoParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitParIExpParD(GramaticaLatinoParser.ParIExpParDContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GramaticaLatinoParser#builtinexp}.
 	 * @param ctx the parse tree
