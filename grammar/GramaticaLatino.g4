@@ -145,7 +145,7 @@ e
     :CADENA_DE_CARACTERES  #cadenaCaracteres
     |ID auxid* #idAuxId
     //|ID '(' contdeclfunciones ')' #idContDeclFunciones
-    |'fun' '(' contdeclfunciones ')' statement 'fin' #funAnonima
+    |('fun'|'funcion') '(' contdeclfunciones ')' statement+ 'fin' #funAnonima
     |VALOR_REAL #valorReal
     |'-' VALOR_REAL #minusValorReal
     |'+' VALOR_REAL #plusValorReal

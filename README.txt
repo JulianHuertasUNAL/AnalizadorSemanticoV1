@@ -18,3 +18,5 @@ concatenar dos expresiones si son de diferente tipo. Se intentó implementar una
 una concatenación hiciera el cambio del tipo de dato con el str() para cada expresión, pero no se logró que funcionara
 correctamente (Se deja comentado en enterExp y exitExp lo que se intentó hacer).
 
+
+

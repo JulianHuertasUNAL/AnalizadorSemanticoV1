@@ -221,16 +221,31 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
         }else if(parent instanceof GramaticaLatinoParser.ContdeclfuncionesContext){
             System.out.print(node.getText());
         }else if(parent instanceof GramaticaLatinoParser.AuxidContext){
-            if(!node.getText().equals(".")){ // Los diccionarios se acceden diferente en python
-                System.out.print(node.getText());
+            if(!node.getText().equals(".") && parent.getChild(0)!=null){ // Los diccionarios se acceden diferente en python
+                if(parent.getChild(0).getText().equals(".")){
+                    System.out.print("\""+node.getText()+"\"]");
+                }else {
+                    System.out.print(node.getText());
+                }
+            }else if(node.getText().equals(".")){
+                System.out.print("[");
             }
         }else if(parent instanceof GramaticaLatinoParser.AsigContext){
             System.out.print(node.getText());
         }else if(parent instanceof GramaticaLatinoParser.AuxidasigContext){
-            System.out.print(node.getText());
+            if(node.getText().equals(".")){
+                System.out.print("[");
+            }else if(parent.getChild(0)!=null){
+                if(parent.getChild(0).getText().equals(".")){
+                    System.out.print("\""+node.getText()+"\"]");
+                }else {
+                    System.out.print(node.getText());
+                }
+            }
+
         }else if(parent instanceof GramaticaLatinoParser.FunAnonimaContext){
             String terminal = node.getText();
-            if(terminal.equals("fun")){
+            if(terminal.equals("fun") || terminal.equals("funcion")){
                 System.out.print("lambda ");
             }else if(terminal.equals(")")){
                 System.out.print(":");
@@ -259,6 +274,8 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
             }else{ ///Aquí con más else if se agregan el resto de built in que sean de los statements, los built in terminales van en otro lado
                 System.out.print(funStatBuiltIn);
             }
+        }else if(parent instanceof GramaticaLatinoParser.FuncContext){
+            System.out.print(node.getText());
         }
 
     }
