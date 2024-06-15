@@ -1131,6 +1131,18 @@ public class GramaticaLatinoParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class EleccioncasoContext extends ParserRuleContext {
+		public EleccioncasoContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_eleccioncaso; }
+	 
+		public EleccioncasoContext() { }
+		public void copyFrom(EleccioncasoContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ElegirStatementContext extends EleccioncasoContext {
 		public List<StatementContext> statement() {
 			return getRuleContexts(StatementContext.class);
 		}
@@ -1140,23 +1152,32 @@ public class GramaticaLatinoParser extends Parser {
 		public ContelegirContext contelegir() {
 			return getRuleContext(ContelegirContext.class,0);
 		}
+		public ElegirStatementContext(EleccioncasoContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterElegirStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitElegirStatement(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ElegirOrContext extends EleccioncasoContext {
 		public CasoexpContext casoexp() {
 			return getRuleContext(CasoexpContext.class,0);
 		}
 		public EleccioncasoContext eleccioncaso() {
 			return getRuleContext(EleccioncasoContext.class,0);
 		}
-		public EleccioncasoContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_eleccioncaso; }
+		public ElegirOrContext(EleccioncasoContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterEleccioncaso(this);
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterElegirOr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitEleccioncaso(this);
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitElegirOr(this);
 		}
 	}
 
@@ -1187,6 +1208,7 @@ public class GramaticaLatinoParser extends Parser {
 			case T__30:
 			case T__31:
 			case ID:
+				_localctx = new ElegirStatementContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(231); 
@@ -1216,6 +1238,7 @@ public class GramaticaLatinoParser extends Parser {
 				}
 				break;
 			case T__23:
+				_localctx = new ElegirOrContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(238);

@@ -54,8 +54,8 @@ contelegir
     ;
 
 eleccioncaso
-    :statement+ contelegir?
-    |'caso' casoexp ':' eleccioncaso
+    :statement+ contelegir? #ElegirStatement
+    |'caso' casoexp ':' eleccioncaso #ElegirOr
     ;
 
 casoexp

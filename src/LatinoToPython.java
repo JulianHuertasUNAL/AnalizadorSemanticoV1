@@ -6,6 +6,7 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
 
     int numIdentation = 0;
     boolean flagConcatenar = false;
+    String nomVarElegir;
     @Override
     public void enterS(GramaticaLatinoParser.SContext ctx) {
         //numIdentation++;
@@ -194,11 +195,53 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
     }
 
     @Override public void enterParIExpParD(GramaticaLatinoParser.ParIExpParDContext ctx) {
-        System.out.print("(");
+        //RuleContext grandparent = (RuleContext) ctx.getParent().getParent(); // Va a mirar que su abuelo no sea de un condicional elegir, para no colocar los paréntesis
+        //if(!(grandparent instanceof GramaticaLatinoParser.ElegirContext)) {
+            System.out.print("(");
+        //}
     }
 
     @Override public void exitParIExpParD(GramaticaLatinoParser.ParIExpParDContext ctx) {
-        System.out.print(")");
+        //RuleContext grandparent = (RuleContext) ctx.getParent().getParent(); // Va a mirar que su abuelo no sea de un condicional elegir, para no colocar los paréntesis
+        //if(!(grandparent instanceof GramaticaLatinoParser.ElegirContext)) {
+            System.out.print(")");
+        //}else{
+        //    System.out.print(" == ");
+        //}
+    }
+
+    @Override public void enterElegir(GramaticaLatinoParser.ElegirContext ctx) {
+        nomVarElegir = ctx.exp().getText();
+    }
+
+    @Override public void enterContelegir(GramaticaLatinoParser.ContelegirContext ctx) {
+        RuleContext parent = (RuleContext) ctx.getParent();
+        if(!(parent instanceof GramaticaLatinoParser.ElegirContext) && ctx.getChild(0).getText().equals("caso")){
+            numIdentation--;
+            System.out.print("\t".repeat(numIdentation) + "elif "+nomVarElegir+" == ");
+        }else if(!(parent instanceof GramaticaLatinoParser.ElegirContext) && (ctx.getChild(0).getText().equals("otro") || ctx.getChild(0).getText().equals("defecto"))) {
+            numIdentation--;
+            System.out.println("\t".repeat(numIdentation) + "else: ");
+            numIdentation++;
+        }else if(parent instanceof GramaticaLatinoParser.ElegirContext){
+            System.out.print(" == ");
+        }
+        if(ctx.casoexp() != null){
+            System.out.print(ctx.casoexp().getText());
+        }
+    }
+
+    @Override public void enterElegirOr(GramaticaLatinoParser.ElegirOrContext ctx){
+        System.out.print(" or "+nomVarElegir+" == " +ctx.casoexp().getText());
+    }
+
+    @Override public void enterElegirStatement(GramaticaLatinoParser.ElegirStatementContext ctx) {
+        System.out.println(":");
+        numIdentation++;
+    }
+
+    @Override public void exitElegir(GramaticaLatinoParser.ElegirContext ctx) {
+        numIdentation--;
     }
 
     @Override public void visitTerminal(TerminalNode node) {//Cada vez que llega a un hoja del árbol sintáctico, mira cuál es su padre y agrega los símbolos terminales de los padres deseados, para poder manipular la traducción de otros casos
@@ -276,6 +319,10 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
             }
         }else if(parent instanceof GramaticaLatinoParser.FuncContext){
             System.out.print(node.getText());
+        }else if(parent instanceof GramaticaLatinoParser.ElegirContext){ //Switch CASE
+            if(node.getText().equals("elegir")){
+                System.out.print("\t".repeat(numIdentation)+ "if ");
+            }
         }
 
     }

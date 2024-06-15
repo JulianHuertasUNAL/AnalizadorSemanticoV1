@@ -1,2 +1,29 @@
-printUseFullLife()
+calificacion='B'
+if (calificacion) == 'A':
+	print("¡Excelente!.")
+elif (calificacion) == 'B':
+	print("¡Bien echo!.")
+elif (calificacion) == 'C':
+	print("¡Bien echo!.")
+elif (calificacion) == 'D':
+	print("Necesitas mejorar.")
+elif (calificacion) == 'F':
+	print("Has reprobado.")
+else: 
+	print("Calificación invalida.")
+
+xd='A'
+if (xd) == 'A':
+	print("¡Excelente!.")
+elif (xd) == 'B':
+	print("¡Bien echo!.")
+elif (xd) == 'C':
+	print("¡Bien echo!.")
+elif (xd) == 'D':
+	print("Necesitas mejorar.")
+elif (xd) == 'F':
+	print("Has reprobado.")
+else: 
+	print("Calificación invalida.")
+
 

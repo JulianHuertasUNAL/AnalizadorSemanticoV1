@@ -184,13 +184,25 @@ public class GramaticaLatinoBaseListener implements GramaticaLatinoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEleccioncaso(GramaticaLatinoParser.EleccioncasoContext ctx) { }
+	@Override public void enterElegirStatement(GramaticaLatinoParser.ElegirStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEleccioncaso(GramaticaLatinoParser.EleccioncasoContext ctx) { }
+	@Override public void exitElegirStatement(GramaticaLatinoParser.ElegirStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterElegirOr(GramaticaLatinoParser.ElegirOrContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElegirOr(GramaticaLatinoParser.ElegirOrContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

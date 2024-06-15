@@ -159,15 +159,29 @@ public interface GramaticaLatinoListener extends ParseTreeListener {
 	 */
 	void exitContelegir(GramaticaLatinoParser.ContelegirContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GramaticaLatinoParser#eleccioncaso}.
+	 * Enter a parse tree produced by the {@code ElegirStatement}
+	 * labeled alternative in {@link GramaticaLatinoParser#eleccioncaso}.
 	 * @param ctx the parse tree
 	 */
-	void enterEleccioncaso(GramaticaLatinoParser.EleccioncasoContext ctx);
+	void enterElegirStatement(GramaticaLatinoParser.ElegirStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GramaticaLatinoParser#eleccioncaso}.
+	 * Exit a parse tree produced by the {@code ElegirStatement}
+	 * labeled alternative in {@link GramaticaLatinoParser#eleccioncaso}.
 	 * @param ctx the parse tree
 	 */
-	void exitEleccioncaso(GramaticaLatinoParser.EleccioncasoContext ctx);
+	void exitElegirStatement(GramaticaLatinoParser.ElegirStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ElegirOr}
+	 * labeled alternative in {@link GramaticaLatinoParser#eleccioncaso}.
+	 * @param ctx the parse tree
+	 */
+	void enterElegirOr(GramaticaLatinoParser.ElegirOrContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ElegirOr}
+	 * labeled alternative in {@link GramaticaLatinoParser#eleccioncaso}.
+	 * @param ctx the parse tree
+	 */
+	void exitElegirOr(GramaticaLatinoParser.ElegirOrContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GramaticaLatinoParser#casoexp}.
 	 * @param ctx the parse tree
