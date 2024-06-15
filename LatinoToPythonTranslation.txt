@@ -1,2 +1,8 @@
-carro[3]=miCarro()
+def asd():
+	x=1
+	def dasdqw():
+		x=2
+
+
+x=231
 

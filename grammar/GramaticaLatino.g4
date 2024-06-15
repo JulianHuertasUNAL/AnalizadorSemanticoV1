@@ -144,8 +144,8 @@ exp
 e
     :CADENA_DE_CARACTERES  #cadenaCaracteres
     |ID auxid* #idAuxId
-    |ID '(' contdeclfunciones ')' #idContDeclFunciones
-    |'fun' '(' contdeclfunciones ')' statement+ 'fin' #funAnonima
+    //|ID '(' contdeclfunciones ')' #idContDeclFunciones
+    |'fun' '(' contdeclfunciones ')' statement 'fin' #funAnonima
     |VALOR_REAL #valorReal
     |'-' VALOR_REAL #minusValorReal
     |'+' VALOR_REAL #plusValorReal
@@ -168,7 +168,7 @@ builtinexp
 
 auxid
     :'[' exp ']'
-    //|'(' exp? ')'
+    |'(' contdeclfunciones? ')'
     |'.' ID
     ;
 

@@ -448,18 +448,6 @@ public class GramaticaLatinoBaseListener implements GramaticaLatinoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIdContDeclFunciones(GramaticaLatinoParser.IdContDeclFuncionesContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitIdContDeclFunciones(GramaticaLatinoParser.IdContDeclFuncionesContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterFunAnonima(GramaticaLatinoParser.FunAnonimaContext ctx) { }
 	/**
 	 * {@inheritDoc}

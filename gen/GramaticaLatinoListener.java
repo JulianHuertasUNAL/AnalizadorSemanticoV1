@@ -383,18 +383,6 @@ public interface GramaticaLatinoListener extends ParseTreeListener {
 	 */
 	void exitIdAuxId(GramaticaLatinoParser.IdAuxIdContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code idContDeclFunciones}
-	 * labeled alternative in {@link GramaticaLatinoParser#e}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdContDeclFunciones(GramaticaLatinoParser.IdContDeclFuncionesContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code idContDeclFunciones}
-	 * labeled alternative in {@link GramaticaLatinoParser#e}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdContDeclFunciones(GramaticaLatinoParser.IdContDeclFuncionesContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code funAnonima}
 	 * labeled alternative in {@link GramaticaLatinoParser#e}.
 	 * @param ctx the parse tree
