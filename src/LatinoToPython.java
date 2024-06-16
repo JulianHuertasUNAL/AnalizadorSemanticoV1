@@ -7,6 +7,9 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
     int numIdentation = 0;
     boolean flagConcatenar = false;
     String nomVarElegir;
+    boolean flagDesde = false; //Se activa cuando se entre a un desde para que no se imprimiman los termnales de las expresiones
+
+
     @Override
     public void enterS(GramaticaLatinoParser.SContext ctx) {
         //numIdentation++;
@@ -29,12 +32,16 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
 
     @Override
     public void enterIdrelated(GramaticaLatinoParser.IdrelatedContext ctx) {
-        System.out.print("\t".repeat(numIdentation) + ctx.ID().getText());
+        if(!flagDesde) {
+            System.out.print("\t".repeat(numIdentation) + ctx.ID().getText());
+        }
         if(ctx.asig()!=null){
             //System.out.print(ctx.ID().getText());
         }
         if(ctx.incdec() != null){
-            System.out.println(ctx.incdec().getText());
+            if(!flagDesde) {
+                System.out.println(ctx.incdec().getText());
+            }
         }
     }
     @Override public void enterAsig(GramaticaLatinoParser.AsigContext ctx) {
@@ -127,15 +134,21 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
     }
 
     @Override public void enterValorReal(GramaticaLatinoParser.ValorRealContext ctx) {
-        System.out.print(ctx.getText());
+        if(!flagDesde) {
+            System.out.print(ctx.getText());
+        }
     }
 
     @Override public void enterMinusValorReal(GramaticaLatinoParser.MinusValorRealContext ctx) {
-        System.out.print(ctx.getText());
+        if(!flagDesde) {
+            System.out.print(ctx.getText());
+        }
     }
 
     @Override public void enterPlusValorReal(GramaticaLatinoParser.PlusValorRealContext ctx) {
-        System.out.print(ctx.getText());
+        if(!flagDesde) {
+            System.out.print(ctx.getText());
+        }
     }
 
     @Override public void enterVerdadero(GramaticaLatinoParser.VerdaderoContext ctx) {
@@ -197,14 +210,18 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
     @Override public void enterParIExpParD(GramaticaLatinoParser.ParIExpParDContext ctx) {
         //RuleContext grandparent = (RuleContext) ctx.getParent().getParent(); // Va a mirar que su abuelo no sea de un condicional elegir, para no colocar los paréntesis
         //if(!(grandparent instanceof GramaticaLatinoParser.ElegirContext)) {
+        if(!flagDesde) {
             System.out.print("(");
+        }
         //}
     }
 
     @Override public void exitParIExpParD(GramaticaLatinoParser.ParIExpParDContext ctx) {
         //RuleContext grandparent = (RuleContext) ctx.getParent().getParent(); // Va a mirar que su abuelo no sea de un condicional elegir, para no colocar los paréntesis
         //if(!(grandparent instanceof GramaticaLatinoParser.ElegirContext)) {
+        if(!flagDesde) {
             System.out.print(")");
+        }
         //}else{
         //    System.out.print(" == ");
         //}
@@ -213,6 +230,48 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
     @Override public void enterElegir(GramaticaLatinoParser.ElegirContext ctx) {
         nomVarElegir = ctx.exp().getText();
     }
+
+    @Override public void enterDesde(GramaticaLatinoParser.DesdeContext ctx) {
+        flagDesde = true;
+        String valorInicial = ctx.asig().cual().getText();
+        String valorFinal;
+        String paso = "";
+        //Dado que en la función in range de python no se incluye el valor que se indica como final, se tiene que tener en cuenta si el operador relacional es >= o <=
+        if(ctx.exp().OPREL().getText().equals("<=")){
+            valorFinal = ctx.exp().exp(1).getText()+"+1";
+        }else if(ctx.exp().OPREL().getText().equals(">=")){
+            valorFinal = ctx.exp().exp(1).getText()+"-1";
+        }else{
+            valorFinal = ctx.exp().exp(1).getText();
+        }
+        //Para el paso se contemplan tres posibilidades: Que sea de la manera i++ o i+=INT o i = i+INT
+        if(ctx.statement(0).idrelated().incdec() != null){//i++
+            if(ctx.statement(0).idrelated().incdec().getText().equals("++")){
+                paso = "1";
+            }else{
+                paso = "-1";
+            }
+        }else if(ctx.statement(0).idrelated().asig() != null){//i+=INT o i-=INT o i = i+INT
+            if(ctx.statement(0).idrelated().asig().OPASIG().getText().equals("+=")){//i+=INT
+                paso = ctx.statement(0).idrelated().asig().cual().getText();
+            }else if(ctx.statement(0).idrelated().asig().OPASIG().getText().equals("-=")){//i-=INT
+                paso = "-"+ctx.statement(0).idrelated().asig().cual().getText();
+            }else if(ctx.statement(0).idrelated().asig().OPASIG().getText().equals("=")){//i = i + INT
+                String signo = ctx.statement(0).idrelated().asig().cual().exp().getChild(1).getText();
+                paso = signo+ctx.statement(0).idrelated().asig().cual().exp().exp(1).getText();
+            }
+        }
+
+
+        System.out.print("\t".repeat(numIdentation) + "for "+ctx.ID().getText() + " in range("+valorInicial+","+valorFinal+","+paso+"):");
+
+
+    }
+
+    @Override public void exitDesde(GramaticaLatinoParser.DesdeContext ctx) {
+        flagDesde = false;
+    }
+
 
     @Override public void enterContelegir(GramaticaLatinoParser.ContelegirContext ctx) {
         RuleContext parent = (RuleContext) ctx.getParent();
@@ -249,18 +308,22 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
 
         // Check if the parent is an instance of the specific context class
         if (parent instanceof GramaticaLatinoParser.ExpContext) {
-            if(node.getText().equals("..")){
-                System.out.print("+");
-                //flagConcatenar = true;
-            }else{
-                System.out.print(node.getText());
+            if(!flagDesde) {
+                if(node.getText().equals("..")){
+                    System.out.print("+");
+                    //flagConcatenar = true;
+                }else{
+                    System.out.print(node.getText());
+                }
             }
         }else if(parent instanceof GramaticaLatinoParser.DicContext){
             System.out.print(node.getText());
         }else if(parent instanceof GramaticaLatinoParser.AuxdicContext){
             System.out.print(node.getText());
         }else if(parent instanceof GramaticaLatinoParser.IdAuxIdContext){
-            System.out.print(node.getText());
+            if(!flagDesde) {
+                System.out.print(node.getText());
+            }
         }else if(parent instanceof GramaticaLatinoParser.ContdeclfuncionesContext){
             System.out.print(node.getText());
         }else if(parent instanceof GramaticaLatinoParser.AuxidContext){
@@ -274,7 +337,9 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
                 System.out.print("[");
             }
         }else if(parent instanceof GramaticaLatinoParser.AsigContext){
-            System.out.print(node.getText());
+            if(!flagDesde) {
+                System.out.print(node.getText());
+            }
         }else if(parent instanceof GramaticaLatinoParser.AuxidasigContext){
             if(node.getText().equals(".")){
                 System.out.print("[");
@@ -322,6 +387,13 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
         }else if(parent instanceof GramaticaLatinoParser.ElegirContext){ //Switch CASE
             if(node.getText().equals("elegir")){
                 System.out.print("\t".repeat(numIdentation)+ "if ");
+            }
+        }else if(parent instanceof GramaticaLatinoParser.DesdeContext){
+            if(node.getText().equals(")")){
+                flagDesde = false;
+                numIdentation++;
+            }else if(node.getText().equals("fin")){
+                numIdentation--;
             }
         }
 
