@@ -20,7 +20,10 @@ builtin
     |'imprimirf' '(' contimprimirf? ')'
     |'limpiar' '(' ')'
     |'acadena' '(' exp ')'
-    ;
+    |'alogico' '(' exp ')'
+    |'anumero' '(' exp ')'
+    |'tipo' '(' exp ')';
+
 
 contimprimirf
     : exp auxcontimprimirf*
@@ -138,6 +141,7 @@ exp
     : exp OPREL exp
     | exp '+' exp
     | exp '-' exp
+    | exp '..' exp
     | e
     ;
 
@@ -197,7 +201,7 @@ OPREL
     |'/'
     |'%'
     |'^'
-    |'..'
+   //|'..'
     ;
 
 ID:[a-zA-Z_][0-9_a-zA-Z]* ;

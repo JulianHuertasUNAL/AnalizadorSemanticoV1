@@ -8,6 +8,7 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
     boolean flagConcatenar = false;
     String nomVarElegir;
     boolean flagDesde = false; //Se activa cuando se entre a un desde para que no se imprimiman los termnales de las expresiones
+    boolean flagRepetir = false;
 
 
     @Override
@@ -32,18 +33,31 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
 
     @Override
     public void enterIdrelated(GramaticaLatinoParser.IdrelatedContext ctx) {
-        if(!flagDesde) {
+        if(!flagDesde && !flagRepetir) {
             System.out.print("\t".repeat(numIdentation) + ctx.ID().getText());
         }
         if(ctx.asig()!=null){
             //System.out.print(ctx.ID().getText());
         }
         if(ctx.incdec() != null){
-            if(!flagDesde) {
-                System.out.println(ctx.incdec().getText());
+            if(!flagDesde && !flagRepetir) {
+                if(ctx.incdec().getText().equals("++")) {
+                    System.out.print("+=1");
+                }else if(ctx.incdec().getText().equals("--")) {
+                    System.out.print("-=1");
+                }
+
             }
         }
     }
+
+    @Override public void enterCual(GramaticaLatinoParser.CualContext ctx) {
+        if(ctx.exp()==null){
+            System.out.print("input()");
+        }
+    }
+
+
     @Override public void enterAsig(GramaticaLatinoParser.AsigContext ctx) {
         /*for(GramaticaLatinoParser.AuxidasigContext auxidasig : ctx.auxidasig()){
             System.out.print(auxidasig.getText());
@@ -56,6 +70,7 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
     }
 
     @Override public void enterExp(GramaticaLatinoParser.ExpContext ctx) {
+
         /*RuleContext parent = (RuleContext) ctx.getParent();
         if(ctx.getChild(1) != null) {//Si encuentra una concatenación, levanta la bandera para hacer la conversión a string de todos los elementos que encuentra para evitar fallos de impresión
             if(ctx.getChild(1).getText().equals("..")){
@@ -86,6 +101,11 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
     }
 
     @Override public void exitExp(GramaticaLatinoParser.ExpContext ctx) {
+        RuleContext parent = (RuleContext) ctx.getParent();
+        if(parent instanceof GramaticaLatinoParser.MientrasContext){
+            System.out.println(":");
+            numIdentation++;
+        }
         /*if(ctx.getParent().getChild(1)!=null && ctx.e()!=null) {
             String brother = ctx.getParent().getChild(1).getText();
             //if (brother.equals("..") /*&& !ctx.getChild(1).getText().equals("..")) { //si el padre no es auxid y el hijo es e no es nulo
@@ -125,7 +145,21 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
 
 
     @Override public void enterIdAuxId(GramaticaLatinoParser.IdAuxIdContext ctx) {
-        //System.out.print(ctx.ID().getText());
+        if(!flagDesde && !flagRepetir) {
+            RuleContext grandparent = (RuleContext) ctx.getParent().getParent();// Va a mirar si el operador relacional es un .. para encerrarse en un str()
+            if((grandparent instanceof GramaticaLatinoParser.ExpContext) && ctx.getParent().getParent().getChild(1).getText().equals("..") ) {
+                System.out.print("str(");
+            }
+        }
+    }
+
+    @Override public void exitIdAuxId(GramaticaLatinoParser.IdAuxIdContext ctx) {
+        if(!flagDesde && !flagRepetir) {
+            RuleContext grandparent = (RuleContext) ctx.getParent().getParent();// Va a mirar si el operador relacional es un .. para encerrarse en un str()
+            if((grandparent instanceof GramaticaLatinoParser.ExpContext) && ctx.getParent().getParent().getChild(1).getText().equals("..") ) {
+                System.out.print(")");
+            }
+        }
     }
 
 
@@ -134,37 +168,80 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
     }
 
     @Override public void enterValorReal(GramaticaLatinoParser.ValorRealContext ctx) {
-        if(!flagDesde) {
-            System.out.print(ctx.getText());
+        if(!flagDesde && !flagRepetir) {
+            RuleContext grandparent = (RuleContext) ctx.getParent().getParent();// Va a mirar si el operador relacional es un .. para encerrarse en un str()
+            if((grandparent instanceof GramaticaLatinoParser.ExpContext) && ctx.getParent().getParent().getChild(1).getText().equals("..") ) {
+                System.out.print("str("+ctx.getText()+")");
+            }else{
+                System.out.print(ctx.getText());
+            }
         }
     }
 
     @Override public void enterMinusValorReal(GramaticaLatinoParser.MinusValorRealContext ctx) {
-        if(!flagDesde) {
-            System.out.print(ctx.getText());
+        if(!flagDesde && !flagRepetir) {
+            RuleContext grandparent = (RuleContext) ctx.getParent().getParent();// Va a mirar si el operador relacional es un .. para encerrarse en un str()
+            if((grandparent instanceof GramaticaLatinoParser.ExpContext) && ctx.getParent().getParent().getChild(1).getText().equals("..") ) {
+                System.out.print("str("+ctx.getText()+")");
+            }else{
+                System.out.print(ctx.getText());
+            }
         }
     }
 
     @Override public void enterPlusValorReal(GramaticaLatinoParser.PlusValorRealContext ctx) {
-        if(!flagDesde) {
-            System.out.print(ctx.getText());
+        if(!flagDesde && !flagRepetir) {
+            RuleContext grandparent = (RuleContext) ctx.getParent().getParent();// Va a mirar si el operador relacional es un .. para encerrarse en un str()
+            if((grandparent instanceof GramaticaLatinoParser.ExpContext) && ctx.getParent().getParent().getChild(1).getText().equals("..") ) {
+                System.out.print("str("+ctx.getText()+")");
+            }else{
+                System.out.print(ctx.getText());
+            }
         }
     }
 
     @Override public void enterVerdadero(GramaticaLatinoParser.VerdaderoContext ctx) {
-        System.out.print("True");
+        if(!flagDesde && !flagRepetir) {
+            RuleContext grandparent = (RuleContext) ctx.getParent().getParent();// Va a mirar si el operador relacional es un .. para encerrarse en un str()
+            if((grandparent instanceof GramaticaLatinoParser.ExpContext) && ctx.getParent().getParent().getChild(1).getText().equals("..") ) {
+                System.out.print("str(True)");
+            }else{
+                System.out.print("True");
+            }
+        }
     }
 
     @Override public void enterCierto(GramaticaLatinoParser.CiertoContext ctx) {
-        System.out.print("True");
+        if(!flagDesde && !flagRepetir) {
+            RuleContext grandparent = (RuleContext) ctx.getParent().getParent();// Va a mirar si el operador relacional es un .. para encerrarse en un str()
+            if((grandparent instanceof GramaticaLatinoParser.ExpContext) && ctx.getParent().getParent().getChild(1).getText().equals("..") ) {
+                System.out.print("str(True)");
+            }else{
+                System.out.print("True");
+            }
+        }
     }
 
     @Override public void enterFalso(GramaticaLatinoParser.FalsoContext ctx) {
-        System.out.print("False");
+        if(!flagDesde && !flagRepetir) {
+            RuleContext grandparent = (RuleContext) ctx.getParent().getParent();// Va a mirar si el operador relacional es un .. para encerrarse en un str()
+            if((grandparent instanceof GramaticaLatinoParser.ExpContext) && ctx.getParent().getParent().getChild(1).getText().equals("..") ) {
+                System.out.print("str(False)");
+            }else{
+                System.out.print("False");
+            }
+        }
     }
 
     @Override public void enterNulo(GramaticaLatinoParser.NuloContext ctx) {
-        System.out.print("None");
+        if(!flagDesde && !flagRepetir) {
+            RuleContext grandparent = (RuleContext) ctx.getParent().getParent();// Va a mirar si el operador relacional es un .. para encerrarse en un str()
+            if((grandparent instanceof GramaticaLatinoParser.ExpContext) && ctx.getParent().getParent().getChild(1).getText().equals("..") ) {
+                System.out.print("str(None)");
+            }else{
+                System.out.print("None");
+            }
+        }
     }
 
     @Override public void enterExpLista(GramaticaLatinoParser.ExpListaContext ctx) { }
@@ -210,8 +287,13 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
     @Override public void enterParIExpParD(GramaticaLatinoParser.ParIExpParDContext ctx) {
         //RuleContext grandparent = (RuleContext) ctx.getParent().getParent(); // Va a mirar que su abuelo no sea de un condicional elegir, para no colocar los paréntesis
         //if(!(grandparent instanceof GramaticaLatinoParser.ElegirContext)) {
-        if(!flagDesde) {
-            System.out.print("(");
+        if(!flagDesde && !flagRepetir) {
+            RuleContext grandparent = (RuleContext) ctx.getParent().getParent();// Va a mirar si el operador relacional es un .. para encerrarse en un str()
+            if((grandparent instanceof GramaticaLatinoParser.ExpContext) && ctx.getParent().getParent().getChild(1).getText().equals("..") ) {
+                System.out.print("str((");
+            }else{
+                System.out.print("(");
+            }
         }
         //}
     }
@@ -219,8 +301,13 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
     @Override public void exitParIExpParD(GramaticaLatinoParser.ParIExpParDContext ctx) {
         //RuleContext grandparent = (RuleContext) ctx.getParent().getParent(); // Va a mirar que su abuelo no sea de un condicional elegir, para no colocar los paréntesis
         //if(!(grandparent instanceof GramaticaLatinoParser.ElegirContext)) {
-        if(!flagDesde) {
-            System.out.print(")");
+        if(!flagDesde && !flagRepetir) {
+            RuleContext grandparent = (RuleContext) ctx.getParent().getParent();// Va a mirar si el operador relacional es un .. para encerrarse en un str()
+            if((grandparent instanceof GramaticaLatinoParser.ExpContext) && ctx.getParent().getParent().getChild(1).getText().equals("..") ) {
+                System.out.print("))");
+            }else{
+                System.out.print(")");
+            }
         }
         //}else{
         //    System.out.print(" == ");
@@ -261,10 +348,7 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
                 paso = signo+ctx.statement(0).idrelated().asig().cual().exp().exp(1).getText();
             }
         }
-
-
         System.out.print("\t".repeat(numIdentation) + "for "+ctx.ID().getText() + " in range("+valorInicial+","+valorFinal+","+paso+"):");
-
 
     }
 
@@ -272,6 +356,9 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
         flagDesde = false;
     }
 
+    @Override public void enterMientras(GramaticaLatinoParser.MientrasContext ctx) {
+        System.out.print("\t".repeat(numIdentation) + "while ");
+    }
 
     @Override public void enterContelegir(GramaticaLatinoParser.ContelegirContext ctx) {
         RuleContext parent = (RuleContext) ctx.getParent();
@@ -303,15 +390,44 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
         numIdentation--;
     }
 
+    @Override public void enterRepetir(GramaticaLatinoParser.RepetirContext ctx) {
+
+        String condicionRepetir = "";
+        if(ctx.exp().OPREL().getText().equals("==")){//Se tiene que poner el inverso del operador relacional y sumar 1 para que se conserve la misma lógica
+            condicionRepetir = ctx.exp().exp(0).getText() + " != "+ ctx.exp().exp(1).getText()+"+1";
+        }else if(ctx.exp().OPREL().getText().equals(">=")){
+            condicionRepetir = ctx.exp().exp(0).getText() + " < "+ ctx.exp().exp(1).getText()+"+1";
+        }else if(ctx.exp().OPREL().getText().equals("<=")){
+            condicionRepetir = ctx.exp().exp(0).getText() + " > "+ ctx.exp().exp(1).getText()+"+1";
+        }else if(ctx.exp().OPREL().getText().equals("<")){
+            condicionRepetir = ctx.exp().exp(0).getText() + " >= "+ ctx.exp().exp(1).getText()+"+1";
+        }else if(ctx.exp().OPREL().getText().equals(">")){
+            condicionRepetir = ctx.exp().exp(0).getText() + " <= "+ ctx.exp().exp(1).getText()+"+1";
+        }
+        System.out.println("\t".repeat(numIdentation) + "while "+ condicionRepetir +":");
+        numIdentation++;
+    }
+
+    @Override public void exitRepetir(GramaticaLatinoParser.RepetirContext ctx) {
+        numIdentation--;
+        flagRepetir = false;
+    }
+
     @Override public void visitTerminal(TerminalNode node) {//Cada vez que llega a un hoja del árbol sintáctico, mira cuál es su padre y agrega los símbolos terminales de los padres deseados, para poder manipular la traducción de otros casos
         RuleContext parent = (RuleContext) node.getParent();
 
         // Check if the parent is an instance of the specific context class
         if (parent instanceof GramaticaLatinoParser.ExpContext) {
-            if(!flagDesde) {
+            if(!flagDesde && !flagRepetir) {
                 if(node.getText().equals("..")){
                     System.out.print("+");
                     //flagConcatenar = true;
+                }else if(node.getText().equals("^")){
+                    System.out.print("**");
+                }else if(node.getText().equals("&&")){
+                    System.out.print(" and ");
+                }else if(node.getText().equals("||")){
+                    System.out.print(" or ");
                 }else{
                     System.out.print(node.getText());
                 }
@@ -321,7 +437,7 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
         }else if(parent instanceof GramaticaLatinoParser.AuxdicContext){
             System.out.print(node.getText());
         }else if(parent instanceof GramaticaLatinoParser.IdAuxIdContext){
-            if(!flagDesde) {
+            if(!flagDesde && !flagRepetir) {
                 System.out.print(node.getText());
             }
         }else if(parent instanceof GramaticaLatinoParser.ContdeclfuncionesContext){
@@ -394,6 +510,20 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
                 numIdentation++;
             }else if(node.getText().equals("fin")){
                 numIdentation--;
+            }
+        }else if(parent instanceof GramaticaLatinoParser.RepetirContext){
+            if(node.getText().equals("hasta")){
+                flagRepetir = true;
+            }
+        }else if(parent instanceof GramaticaLatinoParser.MientrasContext){
+            if(node.getText().equals("fin")){
+                numIdentation--;
+            }
+        }else if(parent instanceof GramaticaLatinoParser.DiccContext){
+            if(node.getText().equals(".")){
+                System.out.print("[");
+            }else{
+                System.out.print("\""+node.getText()+"\"]");
             }
         }
 
