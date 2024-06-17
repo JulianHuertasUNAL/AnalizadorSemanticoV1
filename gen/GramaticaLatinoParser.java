@@ -289,23 +289,158 @@ public class GramaticaLatinoParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class BuiltinContext extends ParserRuleContext {
-		public ExpContext exp() {
-			return getRuleContext(ExpContext.class,0);
-		}
-		public ContimprimirfContext contimprimirf() {
-			return getRuleContext(ContimprimirfContext.class,0);
-		}
 		public BuiltinContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_builtin; }
+	 
+		public BuiltinContext() { }
+		public void copyFrom(BuiltinContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ImprimirContext extends BuiltinContext {
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public ImprimirContext(BuiltinContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterBuiltin(this);
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterImprimir(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitBuiltin(this);
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitImprimir(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class LimpiarContext extends BuiltinContext {
+		public LimpiarContext(BuiltinContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterLimpiar(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitLimpiar(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class AnumeroContext extends BuiltinContext {
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public AnumeroContext(BuiltinContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterAnumero(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitAnumero(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class RomperContext extends BuiltinContext {
+		public RomperContext(BuiltinContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterRomper(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitRomper(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ImprimirfContext extends BuiltinContext {
+		public ContimprimirfContext contimprimirf() {
+			return getRuleContext(ContimprimirfContext.class,0);
+		}
+		public ImprimirfContext(BuiltinContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterImprimirf(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitImprimirf(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class TipoContext extends BuiltinContext {
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public TipoContext(BuiltinContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterTipo(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitTipo(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class PonerContext extends BuiltinContext {
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public PonerContext(BuiltinContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterPoner(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitPoner(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class AcadenaContext extends BuiltinContext {
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public AcadenaContext(BuiltinContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterAcadena(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitAcadena(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class EscribirContext extends BuiltinContext {
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public EscribirContext(BuiltinContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterEscribir(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitEscribir(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class AlogicoContext extends BuiltinContext {
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public AlogicoContext(BuiltinContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).enterAlogico(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GramaticaLatinoListener ) ((GramaticaLatinoListener)listener).exitAlogico(this);
 		}
 	}
 
@@ -318,6 +453,7 @@ public class GramaticaLatinoParser extends Parser {
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case T__0:
+				_localctx = new RomperContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(78);
@@ -325,6 +461,7 @@ public class GramaticaLatinoParser extends Parser {
 				}
 				break;
 			case T__1:
+				_localctx = new ImprimirContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(79);
@@ -338,6 +475,7 @@ public class GramaticaLatinoParser extends Parser {
 				}
 				break;
 			case T__4:
+				_localctx = new EscribirContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(84);
@@ -351,6 +489,7 @@ public class GramaticaLatinoParser extends Parser {
 				}
 				break;
 			case T__5:
+				_localctx = new PonerContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(89);
@@ -364,6 +503,7 @@ public class GramaticaLatinoParser extends Parser {
 				}
 				break;
 			case T__6:
+				_localctx = new ImprimirfContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(94);
@@ -385,6 +525,7 @@ public class GramaticaLatinoParser extends Parser {
 				}
 				break;
 			case T__7:
+				_localctx = new LimpiarContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(100);
@@ -396,6 +537,7 @@ public class GramaticaLatinoParser extends Parser {
 				}
 				break;
 			case T__8:
+				_localctx = new AcadenaContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
 				setState(103);
@@ -409,6 +551,7 @@ public class GramaticaLatinoParser extends Parser {
 				}
 				break;
 			case T__9:
+				_localctx = new AlogicoContext(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
 				setState(108);
@@ -422,6 +565,7 @@ public class GramaticaLatinoParser extends Parser {
 				}
 				break;
 			case T__10:
+				_localctx = new AnumeroContext(_localctx);
 				enterOuterAlt(_localctx, 9);
 				{
 				setState(113);
@@ -435,6 +579,7 @@ public class GramaticaLatinoParser extends Parser {
 				}
 				break;
 			case T__11:
+				_localctx = new TipoContext(_localctx);
 				enterOuterAlt(_localctx, 10);
 				{
 				setState(118);

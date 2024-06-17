@@ -13,6 +13,11 @@ Se hizo la configuración en el IDE Intellij como se mostró durante las clases:
 Recibe inputs por consola
 Imprime la traducción en el archivo de texto LatinoToPythonTranslation.txt
 
+*Hay casos en los que si se encuentra el OPREL de concatenar, no se imprima correctamente la salida, debido al
+que en Python no se puede imprimir si son de diferentes tipos, dependiendo de cómo se arme el árbol sintáctico, la manera
+que se están tratando esos casos en la traducción pueden fallar.Como por ejemplo: poner(i .. ' x ' .. j .. ' = ' .. i * j) para el i*j del final
+
+
 * Para los condicionales de Desde y Repetir, se asume que la forma de las expresiones son como ID OPREL (INT|ID),
 es decir, con formas como i = 1, i+=1, o incluso i = a+1, pero para los casos en que la expresión sea del tipo i = 1+verdadero
 esta no se traducira correctamente, esto debido a que la sintaxis en Python difiere bastante de la de Latino para estos condicionales,
@@ -42,6 +47,7 @@ carro = [
 carro[2] = 2011        //Creamos un nuevo índice #2 y le asignamos el valor de "2011"
 escribir(carro[2])     //Devolverá 2011
 
+* Se importa por defecto la libreria os para función limpiar y se deja la sentencia para limpiar de Windows ('cls')
 
-
-
+* En el built in de anumero, la traducción no replica el comportamiento de las entradas de este estilo:
+escribir(anumero(" "))        //Devolverá 32 (Esto correspondo al código ALT)

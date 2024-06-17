@@ -413,6 +413,23 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
         flagRepetir = false;
     }
 
+    @Override public void enterPara(GramaticaLatinoParser.ParaContext ctx) {
+        String dosParaArgument = "";
+        String tresParaArgument = "";
+        if(ctx.dospara() != null){
+            dosParaArgument = ","+ctx.dospara().VALOR_REAL().getText();
+            if(ctx.dospara().trespara() != null){
+                tresParaArgument = ","+ctx.dospara().trespara().VALOR_REAL().getText();
+            }
+        }
+        System.out.println("\t".repeat(numIdentation) + "for "+ ctx.ID().getText()+" in range("+ctx.VALOR_REAL().getText()+dosParaArgument+tresParaArgument+"):");
+        numIdentation++;
+    }
+
+    @Override public void exitPara(GramaticaLatinoParser.ParaContext ctx) {
+        numIdentation--;
+    }
+
     @Override public void visitTerminal(TerminalNode node) {//Cada vez que llega a un hoja del árbol sintáctico, mira cuál es su padre y agrega los símbolos terminales de los padres deseados, para poder manipular la traducción de otros casos
         RuleContext parent = (RuleContext) node.getParent();
 

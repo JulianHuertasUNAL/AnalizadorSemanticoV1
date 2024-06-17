@@ -13,16 +13,17 @@ statement
     ;
 
 builtin
-    :'romper'
-    |'imprimir' '(' exp ')'
-    |'escribir' '(' exp ')'
-    |'poner' '(' exp ')'
-    |'imprimirf' '(' contimprimirf? ')'
-    |'limpiar' '(' ')'
-    |'acadena' '(' exp ')'
-    |'alogico' '(' exp ')'
-    |'anumero' '(' exp ')'
-    |'tipo' '(' exp ')';
+    :'romper' #Romper
+    |'imprimir' '(' exp ')' #Imprimir
+    |'escribir' '(' exp ')' #Escribir
+    |'poner' '(' exp ')' #Poner
+    |'imprimirf' '(' contimprimirf? ')' #Imprimirf
+    |'limpiar' '(' ')' #Limpiar
+    |'acadena' '(' exp ')' #Acadena
+    |'alogico' '(' exp ')' #Alogico
+    |'anumero' '(' exp ')' #Anumero
+    |'tipo' '(' exp ')' #Tipo
+    ;
 
 
 contimprimirf
