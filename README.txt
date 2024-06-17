@@ -49,5 +49,14 @@ escribir(carro[2])     //Devolverá 2011
 
 * Se importa por defecto la libreria os para función limpiar y se deja la sentencia para limpiar de Windows ('cls')
 
-* En el built in de anumero, la traducción no replica el comportamiento de las entradas de este estilo:
+* En el built in de anumero si  cuenta con un espacio genera error, como la siguiente entrada
 escribir(anumero(" "))        //Devolverá 32 (Esto correspondo al código ALT)
+
+*Se intento usar un formato de función predefinida para que la sintaxis de imprimirf coincida con printf pero debido a que
+Python no maneja todos los formatos de los strings y genera error. La función creada es:
+def printf(format, *values):
+    print(format % values )
+*La traducción no controla las operaciones entre diferentes tipos de datos exceptuando la concatenación, como entradas de este
+estilo: x=str(3)
+        y=float("1245")**2*float('12'+"67")
+        print(y-x)

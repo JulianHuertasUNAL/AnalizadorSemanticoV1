@@ -9,12 +9,19 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
     String nomVarElegir;
     boolean flagDesde = false; //Se activa cuando se entre a un desde para que no se imprimiman los termnales de las expresiones
     boolean flagRepetir = false;
+    boolean first = true;
+    boolean limpieza = false;
+
 
 
     @Override
     public void enterS(GramaticaLatinoParser.SContext ctx) {
-        //numIdentation++;
-        //System.out.println("\t".repeat(numIdentation) + "entro a s");
+        if(first){
+            first = false;
+            System.out.println("import os");
+            System.out.println("def printf(format, *values):\n" +
+                    "    print(format % values )");
+        }
     }
 
     @Override
@@ -26,9 +33,9 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
 
     @Override public void exitStatement(GramaticaLatinoParser.StatementContext ctx) {
         RuleContext parent = (RuleContext) ctx.getParent();
-        if(!(parent instanceof GramaticaLatinoParser.FunAnonimaContext)) {
+       // if(!(parent instanceof GramaticaLatinoParser.FunAnonimaContext)) {
             System.out.println("");
-        }
+       // }
     }
 
     @Override
@@ -71,6 +78,7 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
 
     @Override public void enterExp(GramaticaLatinoParser.ExpContext ctx) {
 
+
         /*RuleContext parent = (RuleContext) ctx.getParent();
         if(ctx.getChild(1) != null) {//Si encuentra una concatenación, levanta la bandera para hacer la conversión a string de todos los elementos que encuentra para evitar fallos de impresión
             if(ctx.getChild(1).getText().equals("..")){
@@ -105,6 +113,15 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
         if(parent instanceof GramaticaLatinoParser.MientrasContext){
             System.out.println(":");
             numIdentation++;
+        }else if(parent instanceof GramaticaLatinoParser.SiContext){
+            ++numIdentation;
+            System.out.println(":");
+        }else if(parent instanceof  GramaticaLatinoParser.OsiContext){
+            ++numIdentation;
+            System.out.println(":");
+        }else if (parent instanceof  GramaticaLatinoParser.SinoContext){
+            ++numIdentation;
+            System.out.println(":");
         }
         /*if(ctx.getParent().getChild(1)!=null && ctx.e()!=null) {
             String brother = ctx.getParent().getChild(1).getText();
@@ -512,8 +529,33 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
             String funStatBuiltIn = node.getText();
             if(funStatBuiltIn.equals("imprimir") || funStatBuiltIn.equals("poner") || funStatBuiltIn.equals("escribir")){
                 System.out.print("\t".repeat(numIdentation)+ "print");
-            }else{ ///Aquí con más else if se agregan el resto de built in que sean de los statements, los built in terminales van en otro lado
+            }else if(funStatBuiltIn.equals("acadena")) {//función acadena
+                System.out.print("\t".repeat(numIdentation) + "str");
+            }else if (funStatBuiltIn.equals("tipo")){
+                System.out.print("\t".repeat(numIdentation) + "type");
+            }else if (funStatBuiltIn.equals("anumero")){
+                System.out.print("\t".repeat(numIdentation) + "float");
+            }else if(funStatBuiltIn.equals("alogico")){
+                System.out.print("\t".repeat(numIdentation) + "bool");
+            }else if(funStatBuiltIn.equals("imprimirf")){
+                System.out.print("\t".repeat(numIdentation) + "printf");
+            }else if (funStatBuiltIn.equals("romper")){
+                System.out.print("\t".repeat(numIdentation) + "break");
+            }else if (!(parent instanceof GramaticaLatinoParser.LimpiarContext)){ ///Aquí con más else if se agregan el resto de built in que sean de los statements, los built in terminales van en otro lado
                 System.out.print(funStatBuiltIn);
+            }
+        }else if(parent instanceof GramaticaLatinoParser.BuiltinexpContext){
+            String funStatBuiltIn = node.getText();
+            if(funStatBuiltIn.equals("alogico")){
+                System.out.print("\t".repeat(numIdentation) + "bool(");
+            }else if(funStatBuiltIn.equals(")")){
+                System.out.print(")");
+            }else if(funStatBuiltIn.equals("acadena")){
+                System.out.print("\t".repeat(numIdentation) + "str(");
+            }else if (funStatBuiltIn.equals("tipo")){
+                System.out.print("\t".repeat(numIdentation) + "type(");
+            }else if (funStatBuiltIn.equals("anumero")){
+                System.out.print("\t".repeat(numIdentation) + "float(");
             }
         }else if(parent instanceof GramaticaLatinoParser.FuncContext){
             System.out.print(node.getText());
@@ -544,5 +586,30 @@ public class LatinoToPython extends GramaticaLatinoBaseListener{
             }
         }
 
+    } @Override public void enterSi(GramaticaLatinoParser.SiContext ctx) {
+        System.out.print("\t".repeat(numIdentation)+"if ");
+    }
+
+    @Override public void exitSi(GramaticaLatinoParser.SiContext ctx) {
+        numIdentation--;
+    }
+
+    @Override public void enterAuxcontimprimirf(GramaticaLatinoParser.AuxcontimprimirfContext ctx) {
+        System.out.print(",");
+    }
+
+    @Override public void enterOsi(GramaticaLatinoParser.OsiContext ctx) {
+        numIdentation--;
+        System.out.print("\t".repeat(numIdentation)+"elif ");
+    }
+    @Override public void enterSino(GramaticaLatinoParser.SinoContext ctx) {
+        numIdentation--;
+        System.out.print("\t".repeat(numIdentation)+"else");
+        numIdentation++;
+        System.out.println(":");
+    }
+
+    @Override public void enterLimpiar(GramaticaLatinoParser.LimpiarContext ctx) {
+        System.out.print("\t".repeat(numIdentation) + "os.system('cls')");
     }
 }
